@@ -1,0 +1,65 @@
+/* alloting space from parent flex */
+.sidebar {
+  position: sticky;
+  top: 50px;
+  flex: 3;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  background: #b993d6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #8ca6db,
+    #b993d6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #8ca6db,
+    #b993d6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+/* add styling for the scroll bar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+.sidebarWrapper {
+  padding: 20px;
+}
+
+.sidebarList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.sidebarListItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.sidebarIcon {
+  margin-right: 20px;
+}
+.sidebarButton {
+  width: 150px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  background-color: #545c91;
+}
+.sidebarHr {
+  margin: 20px 0;
+}
+.sidebarFriendList {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
