@@ -7,6 +7,8 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import Feed from "../../components/feed/Feed";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { projectStorage, projectFirestore } from "../../firebaseConfig";
+import firebase from "firebase";
 import { useLocation } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 const PF = "https://amarsocial.herokuapp.com/images/";
@@ -15,6 +17,10 @@ const Profile = () => {
   const path = useLocation().pathname;
   const [ppfile, setPpfile] = useState(null);
   const [cpfile, setCpfile] = useState(null);
+  const [cpuploading, setCpUploading] = useState(false);
+  const [ppuploading, setPpUploading] = useState(false);
+  const [ppurl, setPpUrl] = useState("");
+  const [cpurl, setCpUrl] = useState("");
   const userId = path.replace("/profile/", "");
   const { user: currentUser, dispatch } = useContext(AuthContext);
 
@@ -27,30 +33,72 @@ const Profile = () => {
       setUser(response.data);
     };
     fetchUser();
-  }, [userId, currentUser]);
+  }, [userId]);
+  //cp file upload
+  const handleProfileUpload = (e) => {
+    e.preventDefault();
+    setPpUploading(true);
+    const fileName = ppfile.name + Date.now();
+    const uploadTask = projectStorage.ref(`images/${fileName}`).put(ppfile);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        //progress function
+      },
+      (error) => {
+        console.log(error);
+        alert(error.message);
+      },
+      () => {
+        projectStorage
+          .ref("images")
+          .child(fileName)
+          .getDownloadURL()
+          .then((url) => {
+            setPpUrl(url);
+            setPpUploading(false);
+          });
+      }
+    );
+  };
+  const handleCoverUpload = (e) => {
+    e.preventDefault();
+    setCpUploading(true);
+    const fileName = cpfile.name + Date.now();
+    const uploadTask = projectStorage.ref(`images/${fileName}`).put(cpfile);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        //progress function
+      },
+      (error) => {
+        console.log(error);
+        alert(error.message);
+      },
+      () => {
+        projectStorage
+          .ref("images")
+          .child(fileName)
+          .getDownloadURL()
+          .then((url) => {
+            setCpUrl(url);
+            setCpUploading(false);
+          });
+      }
+    );
+  };
+
   const handleCoverSubmit = async (e) => {
     e.preventDefault();
+    currentUser.coverPicture = cpurl;
+    currentUser.userId = currentUser._id;
     dispatch({ type: "UPDATE_START" });
-    if (cpfile) {
-      const data = new FormData();
-      const filename = Date.now() + cpfile.name;
-      data.append("name", filename);
-      data.append("file", cpfile);
-      currentUser.coverPicture = filename;
-      currentUser.userId = currentUser._id;
-      try {
-        await axios.post("https://amarsocial.herokuapp.com/api/upload", data, {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "multipart/form-data",
-        });
-      } catch (error) {}
-    }
     try {
       const res = await axios.put(
         "https://amarsocial.herokuapp.com/api/users/" + currentUser._id,
         currentUser
       );
-      dispatch({ type: "UPDATE_SUCCESS", payload: res });
+      dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
       alert("Cover photo  updated!!");
     } catch (error) {
       dispatch({ type: "UPDATE_FAILURE" });
@@ -59,27 +107,16 @@ const Profile = () => {
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: "UPDATE_START" });
-    if (ppfile) {
-      const data = new FormData();
-      const filename = Date.now() + ppfile.name;
-      data.append("name", filename);
-      data.append("file", ppfile);
-      currentUser.profilePicture = filename;
-      currentUser.userId = currentUser._id;
-      try {
-        await axios.post("https://amarsocial.herokuapp.com/api/upload", data, {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "multipart/form-data",
-        });
-      } catch (error) {}
-    }
+    currentUser.profilePicture = ppurl;
+    currentUser.userId = currentUser._id;
     try {
       const res = await axios.put(
         "https://amarsocial.herokuapp.com/api/users/" + currentUser._id,
         currentUser
       );
-      dispatch({ type: "UPDATE_SUCCESS", payload: res });
-      alert("Profile  photo  updated!!");
+      dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+      setPpfile(null);
+      // alert("Profile  photo  updated!!");
     } catch (error) {
       dispatch({ type: "UPDATE_FAILURE" });
     }
@@ -98,7 +135,7 @@ const Profile = () => {
                   cpfile
                     ? URL.createObjectURL(cpfile)
                     : user.coverPicture
-                    ? PF + user.coverPicture
+                    ? user.coverPicture
                     : PF + "no-cover.jpg"
                 }
                 alt=""
@@ -114,8 +151,21 @@ const Profile = () => {
                 onChange={(e) => setCpfile(e.target.files[0])}
               />
               {cpfile && (
-                <button className="coverBtn" onClick={handleCoverSubmit}>
-                  Update
+                <button
+                  className="coverBtn"
+                  onClick={handleCoverSubmit}
+                  disabled={cpuploading}
+                >
+                  {cpuploading ? "Wait.." : "Update"}
+                </button>
+              )}
+              {cpfile && (
+                <button
+                  className="coverBtn2"
+                  onClick={handleCoverUpload}
+                  disabled={cpuploading}
+                >
+                  {cpuploading ? "Uploading.." : "Upload"}
                 </button>
               )}
 
@@ -125,7 +175,7 @@ const Profile = () => {
                     ppfile
                       ? URL.createObjectURL(ppfile)
                       : user.profilePicture
-                      ? PF + user.profilePicture
+                      ? user.profilePicture
                       : PF + "avatar.png"
                   }
                   alt=""
@@ -141,8 +191,21 @@ const Profile = () => {
                   onChange={(e) => setPpfile(e.target.files[0])}
                 />
                 {ppfile && (
-                  <button className="profileBtn" onClick={handleProfileSubmit}>
-                    Update
+                  <button
+                    className="profileBtn"
+                    onClick={handleProfileSubmit}
+                    disabled={ppuploading}
+                  >
+                    {ppuploading ? "Wait..." : "Update"}
+                  </button>
+                )}
+                {ppfile && (
+                  <button
+                    className="profileBtn2"
+                    onClick={handleProfileUpload}
+                    disabled={ppuploading}
+                  >
+                    {ppuploading ? "Uploading..." : "Upload"}
                   </button>
                 )}
               </div>

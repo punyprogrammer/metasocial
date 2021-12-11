@@ -4,6 +4,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { projectStorage, projectFirestore } from "../../firebaseConfig";
 import axios from "axios";
 import "./share.css";
 import { useContext } from "react";
@@ -14,32 +15,51 @@ const Share = () => {
   const { user } = useContext(AuthContext);
   const sharedesc = useRef("");
   const [file, setFile] = useState(null);
+  const [url, setUrl] = useState(" ");
+  const [uploading, setUploading] = useState(false);
+  const handleUpload = (e) => {
+    e.preventDefault();
+    setUploading(true);
+    const fileName = file.name + Date.now();
+    const uploadTask = projectStorage.ref(`images/${fileName}`).put(file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        //progress function
+      },
+      (error) => {
+        console.log(error);
+        alert(error.message);
+      },
+      () => {
+        projectStorage
+          .ref("images")
+          .child(fileName)
+          .getDownloadURL()
+          .then((url) => {
+            setUrl(url);
+            setUploading(false);
+          });
+      }
+    );
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const newPost = {
+    let newPost = {
       userId: user._id,
       description: sharedesc.current.value,
     };
     if (file) {
-      const data = new FormData();
-      const fileName = Date.now() + file.name.toLowerCase();
-
-      data.append("name", fileName);
-      data.append("file", file);
-      newPost.img = fileName;
-
-      try {
-        await axios.post("https://amarsocial.herokuapp.com/api/upload", data, {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "multipart/form-data",
-        });
-      } catch (error) {}
+      newPost.img = url;
     }
+
     try {
       await axios.post("https://amarsocial.herokuapp.com/api/posts", newPost, {
         "Access-Control-Allow-Origin": "*",
       });
+
       window.location.reload();
     } catch (error) {}
   };
@@ -50,7 +70,7 @@ const Share = () => {
           <img
             type="text"
             src={
-              user.profilePicture ? PF + user.profilePicture : PF + "avatar.png"
+              user.profilePicture ?  user.profilePicture : PF + "avatar.png"
             }
             alt=""
             className="shareProfileImg"
@@ -96,7 +116,20 @@ const Share = () => {
             <div className="shareOption">
               <EmojiEmotionsIcon htmlColor="#ffca28" className="shareIcon" />
               <span className="shareOptionText">Feeling</span>
-              <button className="shareButton" type="submit">
+              {file && (
+                <button
+                  className="shareButton"
+                  onClick={handleUpload}
+                  disabled={uploading}
+                >
+                  {uploading ? "Uploading" : "Upload"}
+                </button>
+              )}
+              <button
+                className="shareButton"
+                type="submit"
+                disabled={uploading}
+              >
                 Share
               </button>
             </div>

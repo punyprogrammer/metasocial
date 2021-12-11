@@ -79,7 +79,7 @@ export default function Rightbar({ user }) {
       );
       alert("Profile details  updated!!");
       setUpdateMode(false);
-      dispatch({ type: "UPDATE_SUCCESS", payload: res });
+      dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
     } catch (error) {
       dispatch({ type: "UPDATE_FAILURE" });
     }
@@ -179,7 +179,7 @@ export default function Rightbar({ user }) {
                 <img
                   src={
                     friend.profilePicture
-                      ? PF + friend.profilePicture
+                      ? friend.profilePicture
                       : PF + "person/noAvatar.png"
                   }
                   alt=""

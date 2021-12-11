@@ -57,7 +57,19 @@
 }
 .profileBtn {
   position: absolute;
-  left: 550px;
+  left: 590px;
+  top: 378px;
+  cursor: pointer;
+  padding: 5px;
+  border: none;
+  background-color: #545c91;
+  font-weight: 500;
+  color: white;
+  border-radius: 5px;
+}
+.profileBtn2 {
+  position: absolute;
+  left: 530px;
   top: 378px;
   cursor: pointer;
   padding: 5px;
@@ -70,6 +82,18 @@
 .coverBtn {
   position: absolute;
   top: 285px;
+  left: 50px;
+  cursor: pointer;
+  padding: 5px;
+  border: none;
+  background-color: #545c91;
+  font-weight: 500;
+  color: white;
+  border-radius: 5px;
+}
+.coverBtn2 {
+  position: absolute;
+  top: 240px;
   left: 50px;
   cursor: pointer;
   padding: 5px;

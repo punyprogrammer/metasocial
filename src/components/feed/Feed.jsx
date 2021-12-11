@@ -30,7 +30,7 @@ const Feed = ({ userId }) => {
       //
     };
     fetchPosts();
-  }, [userId]);
+  }, [userId, user]);
   return (
     <div className="feed">
       <div className="feedWrapper">
