@@ -5,8 +5,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Comments } from "../../dummy";
+import SendIcon from "@mui/icons-material/Send";
+import Comment from "../comments/Comment";
 const PF = "https://amarsocial.herokuapp.com/images/";
 
 const Post = ({ post }) => {
@@ -15,9 +18,13 @@ const Post = ({ post }) => {
   // const user = Users.filter((e) => {
   //   return e.id === post.userId;
   // });
+
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
+  const [commentslist, setCommentsList] = useState([]);
+
   const [user, setUser] = useState({});
+  const commentText = useRef();
   useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get(
@@ -27,7 +34,17 @@ const Post = ({ post }) => {
       setUser(response.data);
     };
     fetchUser();
-  }, [post.userId]);
+  }, []);
+  //useEffect to update comments
+  useEffect(() => {
+    const fetchComments = async () => {
+      const response = await axios.get(
+        `https://amarsocial.herokuapp.com/api/posts/${post._id}/comment`
+      );
+      setCommentsList(response.data.comments.sort((a, b) => b._id - a._id));
+    };
+    fetchComments();
+  }, []);
   const likeHandler = async () => {
     try {
       await axios.put(
@@ -40,6 +57,26 @@ const Post = ({ post }) => {
     setLike(isLiked ? like - 1 : like + 1);
 
     setIsLiked(!isLiked);
+  };
+  const submitComment = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.put(
+        `https://amarsocial.herokuapp.com/api/posts/${post._id}/comment`,
+        {
+          _id: Date.now(),
+          username: currentUser.userName,
+          userId: currentUser._id,
+          profilePicture: currentUser.profilePicture,
+          comment: commentText.current.value,
+        }
+      );
+      const response = await axios.get(
+        `https://amarsocial.herokuapp.com/api/posts/${post._id}/comment`
+      );
+      setCommentsList(response.data.comments.sort((a, b) => b._id - a._id));
+      commentText.current.value = "";
+    } catch (err) {}
   };
 
   return (
@@ -85,7 +122,33 @@ const Post = ({ post }) => {
             <span className="postlikeCounter"> {like} people like it</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">{post.comment} Comments</span>
+            <span className="postCommentText">
+              {commentslist.length} Comments
+            </span>
+          </div>
+        </div>
+        <div className="postCommentsWrapper">
+          <div className="writeCommentContainer">
+            <img
+              src={currentUser.profilePicture}
+              alt=""
+              className="writeCommentImg"
+            />
+            <input
+              type="text"
+              className="commentInput"
+              placeholder="Add your Comment..."
+              ref={commentText}
+            />
+            <SendIcon
+              onClick={submitComment}
+              style={{ padding: "10px", cursor: "pointer" }}
+            />
+          </div>
+          <div className="postedCommentsContainer">
+            {commentslist.slice(0, 4).map((e) => {
+              return <Comment key={e.id} comment={e} />;
+            })}
           </div>
         </div>
       </div>

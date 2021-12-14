@@ -70,3 +70,28 @@
   border-bottom: 1px;
   font-size: 15px;
 }
+.writeCommentContainer {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+.writeCommentImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.commentInput {
+  border: none;
+  padding: 10px;
+  outline: none;
+  border-radius: 10px;
+  background-color: #bab5d0;
+  width: 100%;
+  margin-left: 15px;
+}
+.writeCommentContainer {
+  margin-top: 15px;
+}
+.postedCommentsContainer {
+}

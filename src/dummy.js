@@ -1,28 +1,35 @@
-export const Users = [
+export const Comments = [
   {
     id: 1,
-    profilePicture: "ppic1.jpg",
-    username: "Isabelle ",
+    profilePicture:
+      "https://firebasestorage.googleapis.com/v0/b/metasocial-img.appspot.com/o/images%2F2160752.jpg1639234241592?alt=media&token=e229b89e-4dd7-4d94-8575-51403813eb2c",
+    username: "john ",
+    comment:
+      "Amasfasfs sdfsdfs sdfsdfs sdfsdfsdf sdfsdfafsfasjaf iasfisfs sidfjsif",
   },
   {
     id: 2,
-    profilePicture: "ppic2.jpg",
-    username: "Jane Taylor",
+    profilePicture:
+      "https://firebasestorage.googleapis.com/v0/b/metasocial-img.appspot.com/o/images%2F2160752.jpg1639234241592?alt=media&token=e229b89e-4dd7-4d94-8575-51403813eb2c",
+    username: "john ",
+    comment:
+      "Amasfasfs sdfsdfs sdfsdfs sdfsdfsdf sdfsdfafsfasjaf iasfisfs sidfjsif",
   },
   {
     id: 3,
-    profilePicture: "ppic3.jpg",
-    username: "Meenakshi",
+    profilePicture:
+      "https://firebasestorage.googleapis.com/v0/b/metasocial-img.appspot.com/o/images%2F2160752.jpg1639234241592?alt=media&token=e229b89e-4dd7-4d94-8575-51403813eb2c",
+    username: "john ",
+    comment:
+      "Amasfasfs sdfsdfs sdfsdfs sdfsdfsdf sdfsdfafsfasjaf iasfisfs sidfjsif",
   },
   {
     id: 4,
-    profilePicture: "ppic4.jpg",
-    username: "Smita Singh",
-  },
-  {
-    id: 5,
-    profilePicture: "ppic5.jpg",
-    username: "Sakshi",
+    profilePicture:
+      "https://firebasestorage.googleapis.com/v0/b/metasocial-img.appspot.com/o/images%2F2160752.jpg1639234241592?alt=media&token=e229b89e-4dd7-4d94-8575-51403813eb2c",
+    username: "john ",
+    comment:
+      "Amasfasfs sdfsdfs sdfsdfs sdfsdfsdf sdfsdfafsfasjaf iasfisfs sidfjsif",
   },
 ];
 
