@@ -2,6 +2,7 @@ import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import Search from "./pages/search/Search";
 import {
   BrowserRouter as Router,
   Routes,
@@ -31,6 +32,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/profile/:userId" element={<Profile />}></Route>
+      </Routes>
+      <Routes>
+        <Route path="/search/:searhQuery" element={<Search />}></Route>
       </Routes>
     </Router>
   );

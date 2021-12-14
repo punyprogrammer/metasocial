@@ -1,0 +1,44 @@
+.userResultContainer {
+  margin-left: 20px;
+  padding: 20px;
+  display: flex;
+
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+.userResultInfo {
+  display: flex;
+  flex-direction: column;
+  object-fit: cover;
+  margin-left: 20px;
+  width: 100%;
+}
+.userResultImage {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+.userResultFrom {
+  font-size: 13px;
+}
+.userResultCity {
+  font-size: 13px;
+}
+.userResultUserName {
+  font-size: 18px;
+}
+.userProfileBtn {
+  background-color: #545c91;
+  color: white;
+  font-weight: 400;
+  border-radius: 8px;
+  display: flex;
+  padding: 10px;
+  border: none;
+  width: 80px;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+}

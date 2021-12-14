@@ -7,11 +7,19 @@ import "./topbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
+import { useRef } from "react";
 const PF = "https://amarsocial.herokuapp.com/images/";
 
 const Topbar = () => {
   const { dispatch, user } = useContext(AuthContext);
   const history = useNavigate();
+  const searchQuery = useRef();
+  const showSearch = (e) => {
+    if (e.keyCode === 13) {
+      console.log("Enerererkekerj");
+      history(`/search/${searchQuery.current.value}`);
+    }
+  };
 
   const logoutHandler = (e) => {
     e.preventDefault();
@@ -35,6 +43,8 @@ const Topbar = () => {
             type="text"
             className="searchInput"
             placeholder="Search for People ,Posts"
+            ref={searchQuery}
+            onKeyDown={(e) => showSearch(e)}
           />
         </div>
       </div>

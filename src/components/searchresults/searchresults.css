@@ -1,0 +1,32 @@
+.searchResultsWrapper {
+  flex: 5.5;
+}
+.searchResultsHeader {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 500;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: lavender;
+}
+.postResultsCount {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  margin-left: 20px;
+  padding: 20px;
+  font-weight: 500;
+  background-color: lavender;
+}
+.userResultsCount {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  margin-left: 20px;
+  padding: 20px;
+  font-weight: 500;
+  background-color: lavender;
+}
