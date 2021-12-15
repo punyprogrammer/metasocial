@@ -10,10 +10,14 @@ import "./share.css";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 const PF = "https://amarsocial.herokuapp.com/images/";
+const isVideo = (src) => {
+  return src.name.includes(".mp4");
+};
 
 const Share = () => {
   const { user } = useContext(AuthContext);
   const sharedesc = useRef("");
+  const [videoname, setVideoName] = useState("");
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState(" ");
   const [uploading, setUploading] = useState(false);
@@ -21,6 +25,7 @@ const Share = () => {
     e.preventDefault();
     setUploading(true);
     const fileName = file.name + Date.now();
+    setVideoName(fileName);
     const uploadTask = projectStorage.ref(`images/${fileName}`).put(file);
     uploadTask.on(
       "state_changed",
@@ -38,6 +43,7 @@ const Share = () => {
           .getDownloadURL()
           .then((url) => {
             setUrl(url);
+            console.log(url);
             setUploading(false);
           });
       }
@@ -53,6 +59,7 @@ const Share = () => {
     };
     if (file) {
       newPost.img = url;
+      newPost.videoUrl = videoname;
     }
 
     try {
@@ -69,9 +76,7 @@ const Share = () => {
         <div className="shareTop">
           <img
             type="text"
-            src={
-              user.profilePicture ?  user.profilePicture : PF + "avatar.png"
-            }
+            src={user.profilePicture ? user.profilePicture : PF + "avatar.png"}
             alt=""
             className="shareProfileImg"
           />
@@ -82,15 +87,31 @@ const Share = () => {
           />
         </div>
         <hr className="shareHr" />
-        {file && (
-          <div className="shareImgContainer">
-            <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
-            <CancelIcon
-              className="shareCancelImg"
-              onClick={() => setFile(null)}
-            />
-          </div>
-        )}
+        {file &&
+          (isVideo(file) ? (
+            <div className="shareImgContainer">
+              <video
+                className="shareImg"
+                src={URL.createObjectURL(file)}
+              ></video>
+              <CancelIcon
+                className="shareCancelImg"
+                onClick={() => setFile(null)}
+              />
+            </div>
+          ) : (
+            <div className="shareImgContainer">
+              <img
+                className="shareImg"
+                src={URL.createObjectURL(file)}
+                alt=""
+              />
+              <CancelIcon
+                className="shareCancelImg"
+                onClick={() => setFile(null)}
+              />
+            </div>
+          ))}
         <div className="shareBottom">
           <form className="shareOptions" onSubmit={submitHandler}>
             <label htmlFor="file" className="shareOption">
@@ -100,7 +121,7 @@ const Share = () => {
                 style={{ display: "none" }}
                 type="file"
                 id="file"
-                accept=".png,.jpeg,.jpg"
+                accept=".png,.jpeg,.jpg,.mp4,.mkv,.3gp"
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </label>

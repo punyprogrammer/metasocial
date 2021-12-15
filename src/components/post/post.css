@@ -93,5 +93,9 @@
 .writeCommentContainer {
   margin-top: 15px;
 }
+.videoContainer {
+  margin-top: 20px;
+  border-radius: 10px;
+}
 .postedCommentsContainer {
 }

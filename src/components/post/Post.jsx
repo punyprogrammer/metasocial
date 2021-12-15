@@ -1,5 +1,6 @@
 import React from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ReactPlayer from "react-player";
 import "./post.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -9,6 +10,7 @@ import { useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Comments } from "../../dummy";
 import SendIcon from "@mui/icons-material/Send";
+import { projectStorage, projectFirestore } from "../../firebaseConfig";
 import Comment from "../comments/Comment";
 const PF = "https://amarsocial.herokuapp.com/images/";
 
@@ -22,9 +24,28 @@ const Post = ({ post }) => {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [commentslist, setCommentsList] = useState([]);
+  const [video, setVideo] = useState(false);
+  const [videourl, setVideoUrl] = useState("");
 
   const [user, setUser] = useState({});
   const commentText = useRef();
+  //function to check video
+  const isVideo = (src) => {
+    return src.includes(".mp4");
+  };
+  //useEffect
+  useEffect(() => {
+    if (isVideo(post.img)) {
+      projectStorage
+        .ref("images")
+        .child(post.videoUrl)
+        .getDownloadURL()
+        .then((url) => {
+          setVideoUrl(url);
+          console.log(url);
+        });
+    }
+  }, []);
   useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get(
@@ -103,7 +124,24 @@ const Post = ({ post }) => {
         </div>
         <div className="postCenter">
           <span className="postText">{post.description} </span>
-          <img src={`${post.img}`} alt="" className="postImg" />
+          {isVideo(post.img) ? (
+            videourl && (
+              <ReactPlayer
+                id="myVedio"
+                url={videourl}
+                className="videoContainer"
+                width="100%"
+                height="100%"
+                playing={true}
+                controls={true}
+                volume={1}
+                progressInterval={5000}
+                pip={true}
+              />
+            )
+          ) : (
+            <img src={`${post.img}`} alt="" className="postImg" />
+          )}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

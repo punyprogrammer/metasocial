@@ -83,5 +83,9 @@
   top: 0;
   right: 20px;
   cursor: pointer;
-  opacity: 1.2;
+  color: white;
+  height: 40px;
+  width: 40px;
+
+  z-index: 100;
 }
