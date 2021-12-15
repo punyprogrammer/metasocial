@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# MetaSocial -A social media application made with React and Node
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Link-[Link](https://amar-metasocial.netlify.app)
 
-## Available Scripts
+## Currently supported features
 
-In the project directory, you can run:
+### 1) User Authentication using ContextAPI
 
-### `npm start`
+### 2) Users can upload images and captions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 3) Users can like posts
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 4) Users can follow other users
 
-### `npm test`
+### 5) Search users,posts.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features to be added
 
-### `npm run build`
+### 1) Chat functionality
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2) Comment functionality
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3) Upload videos
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 1) Homepage
 
-### `npm run eject`
+![homepage](https://user-images.githubusercontent.com/83149058/145684742-77fc18b5-4988-4eca-b842-cb8f7c9c579a.PNG)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 2) Profile Page
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![profilepage](https://user-images.githubusercontent.com/83149058/145684825-43d77a4b-0c98-4dad-8832-0f7553ab514d.PNG)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 3) Login Page
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![loginpage](https://user-images.githubusercontent.com/83149058/145684844-be42549c-0b43-4b9e-a7c9-98be5546b35e.PNG)
 
-## Learn More
+## 4)Search Users and Posts
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![search_function](https://user-images.githubusercontent.com/83149058/145991513-ea2aa0b3-ec4b-4e51-b496-b51f178630a8.PNG)
