@@ -37,3 +37,9 @@
 ## 4)Search Users and Posts
 
 ![search_function](https://user-images.githubusercontent.com/83149058/145991513-ea2aa0b3-ec4b-4e51-b496-b51f178630a8.PNG)
+##  5)Comment Functionality
+![commet_functionality](https://user-images.githubusercontent.com/83149058/146159546-9f534b7a-a696-4fb0-820a-1ee9b633992a.PNG)
+## 6) Video player
+![videofeature](https://user-images.githubusercontent.com/83149058/146159728-79ef48ac-6426-4581-8806-857f656d6b1e.PNG)
+
+
