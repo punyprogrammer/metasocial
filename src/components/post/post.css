@@ -99,5 +99,17 @@
   margin-top: 20px;
   border-radius: 10px;
 }
+.videoPlayerWrapper {
+  position: absolute;
+}
+.playIcon {
+  position: relative;
+  top: 258px;
+  left: 270px;
+  z-index: 100;
+  font-size: 100px;
+  color: antiquewhite;
+  cursor: pointer;
+}
 .postedCommentsContainer {
 }

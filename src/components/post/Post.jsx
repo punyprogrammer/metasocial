@@ -3,6 +3,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ReactPlayer from "react-player";
 import "./post.css";
 import { useState, useEffect } from "react";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
@@ -26,6 +27,7 @@ const Post = ({ post }) => {
   const [commentslist, setCommentsList] = useState([]);
   const [video, setVideo] = useState(false);
   const [videourl, setVideoUrl] = useState("");
+  const [playing, setPlaying] = useState(false);
 
   const [user, setUser] = useState({});
   const commentText = useRef();
@@ -126,18 +128,25 @@ const Post = ({ post }) => {
           <span className="postText">{post.description} </span>
           {isVideo(post.img) ? (
             videourl && (
-              <ReactPlayer
-                id="myVedio"
-                url={videourl}
-                className="videoContainer"
-                width="100%"
-                height="100%"
-                playing={true}
-                controls={true}
-                volume={1}
-                progressInterval={5000}
-                pip={true}
-              />
+              <div className="videoplayerWrapper">
+                {playing&&(<PlayArrowIcon
+                  style={{ fontSize: "100px" }}
+                  className="playIcon"
+                  onClick={() => setPlaying(true)}
+                />)}
+                <ReactPlayer
+                  id="myVedio"
+                  url={videourl}
+                  className="videoContainer"
+                  width="100%"
+                  height="100%"
+                  playing={playing}
+                  controls={true}
+                  volume={1}
+                  progressInterval={5000}
+                  pip={true}
+                />
+              </div>
             )
           ) : (
             <img src={`${post.img}`} alt="" className="postImg" />

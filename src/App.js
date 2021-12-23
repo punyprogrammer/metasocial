@@ -3,6 +3,7 @@ import Profile from "./pages/profile/Profile";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Search from "./pages/search/Search";
+import Messenger from "./pages/messenger/Messenger";
 import {
   BrowserRouter as Router,
   Routes,
@@ -35,6 +36,12 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/search/:searhQuery" element={<Search />}></Route>
+      </Routes>
+      <Routes>
+        <Route
+          path="/messenger"
+          element={user ? <Messenger /> : <Navigate to="/register" />}
+        ></Route>
       </Routes>
     </Router>
   );

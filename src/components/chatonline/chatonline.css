@@ -1,0 +1,32 @@
+.chatOnlineContainer {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 9px;
+}
+.chatOnlineUserImg {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.chatOnlineUserName {
+  margin-left: 10px;
+  font-weight: 500;
+}
+.chatOnlineImgContainer {
+  position: relative;
+}
+.chatOnlineContainer:hover {
+  background-color: rgb(227, 224, 224);
+}
+.chatOnlineUserBadge {
+  position: absolute;
+  height: 11px;
+  width: 11px;
+  border-radius: 50%;
+  top: -3px;
+  right: -3px;
+  background-color: green;
+}
