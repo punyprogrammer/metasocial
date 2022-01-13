@@ -18,6 +18,8 @@
 
 ### 7) Upload videos
 
+### 8) Chat Functionality
+
 ## Features to be added
 
 ### 1) Chat functionality
@@ -45,3 +47,7 @@
 ## 6) Video player
 
 ![videofeature](https://user-images.githubusercontent.com/83149058/146159728-79ef48ac-6426-4581-8806-857f656d6b1e.PNG)
+
+## 7) Chat Functionality
+
+![chatfunctionality](https://user-images.githubusercontent.com/83149058/147262194-6729fd14-a15a-4295-9309-9ec89f69cfb0.PNG)

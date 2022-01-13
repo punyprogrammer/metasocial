@@ -21,6 +21,7 @@ const Post = ({ post }) => {
   // const user = Users.filter((e) => {
   //   return e.id === post.userId;
   // });
+  console.log(post);
 
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
@@ -37,7 +38,7 @@ const Post = ({ post }) => {
   };
   //useEffect
   useEffect(() => {
-    if (isVideo(post.img)) {
+    if (post.img&&isVideo(post.img)) {
       projectStorage
         .ref("images")
         .child(post.videoUrl)
@@ -126,14 +127,16 @@ const Post = ({ post }) => {
         </div>
         <div className="postCenter">
           <span className="postText">{post.description} </span>
-          {isVideo(post.img) ? (
+          {(post.img&&isVideo(post.img)) ? (
             videourl && (
               <div className="videoplayerWrapper">
-                {playing&&(<PlayArrowIcon
-                  style={{ fontSize: "100px" }}
-                  className="playIcon"
-                  onClick={() => setPlaying(true)}
-                />)}
+                {playing && (
+                  <PlayArrowIcon
+                    style={{ fontSize: "100px" }}
+                    className="playIcon"
+                    onClick={() => setPlaying(true)}
+                  />
+                )}
                 <ReactPlayer
                   id="myVedio"
                   url={videourl}
