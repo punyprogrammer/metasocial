@@ -13,7 +13,7 @@
   background: linear-gradient(to top, #8ca6db, #b993d6);
 }
 .loginWrapper {
-  width: 70%;
+  width: 75%;
   height: 70%;
   display: flex;
 }
@@ -79,7 +79,7 @@
 }
 .loginRegisterButton {
   height: 50px;
-  width:100%;
+  width: 100%;
   border-radius: 10px;
   border: none;
   color: white;
@@ -127,4 +127,35 @@
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
+}
+
+/* media-queries */
+@media screen and (max-width: 480px) {
+  .loginWrapper {
+    flex-direction: column;
+  }
+  .loginDesc {
+    font-size: 17px;
+  }
+  .loginInput {
+    height: 30px;
+    font-size: 16px;
+  }
+  .loginRight {
+    margin-top: 10px;
+  }
+  .registerBox {
+    height: 50vh;
+  }
+  .loginButton,
+  .loginRegisterButton {
+    height: 30px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    font-size: 16px;
+  }
+  .loginForgot {
+    font-size: 12px;
+    margin-top: 0;
+  }
 }
