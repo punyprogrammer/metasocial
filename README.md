@@ -1,6 +1,6 @@
 # MetaSocial -A social media application made with React and Node
 
-## Project Link-[Link](https://amar-metasocial.netlify.app)
+## Deployed Link-[Link](https://metasocial.vercel.app/)
 
 ## Currently supported features
 
